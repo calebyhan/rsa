@@ -1,8 +1,8 @@
 import math
 import random
 
-p = 809157006497460758980692420943
-q = 121478742909457639207510613113
+p = 61
+q = 89
 
 
 def find_keys(p, q):
@@ -11,7 +11,7 @@ def find_keys(p, q):
     l = math.lcm(p - 1, q - 1)
 
     while True:
-        e = random.randint(2, int(l ** (1/10)))
+        e = random.randint(2, int(l ** (1/2)))
         if math.gcd(e, l) == 1:
             break
 
@@ -25,14 +25,14 @@ def encrypt(message, e, n):
 
 
 def decrypt(c, d, n):
-    return (c ** d) & n
+    return (c ** d) % n
 
 
 d, e, n = find_keys(p, q)
 
-print(e)
+print(d, e, n)
 
-c = encrypt(85121215, e, n)
+c = encrypt(85, e, n)
 
 print("done")
 
