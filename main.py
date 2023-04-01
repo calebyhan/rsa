@@ -1,15 +1,39 @@
-import random
 import math
+import random
 
-def generate(n):
-    nums = [False, False]
-    nums += [True] * (n - 1)
-    for i in range(2, int(math.sqrt(n)) + 1):
-        if nums[i]:
-            j = 0
-            while (i ** 2) + (j * i) <= n:
-                nums[(i ** 2) + (j * i)] = False
-                j += 1
-    return nums
+p = 809157006497460758980692420943
+q = 121478742909457639207510613113
 
-a = generate(10000000)
+
+def find_keys(p, q):
+    n = p * q
+
+    l = math.lcm(p - 1, q - 1)
+
+    while True:
+        e = random.randint(2, int(l ** (1/10)))
+        if math.gcd(e, l) == 1:
+            break
+
+    d = pow(e, -1, l)
+
+    return d, e, n
+
+
+def encrypt(message, e, n):
+    return (message ** e) % n
+
+
+def decrypt(c, d, n):
+    return (c ** d) & n
+
+
+d, e, n = find_keys(p, q)
+
+print(e)
+
+c = encrypt(85121215, e, n)
+
+print("done")
+
+print(decrypt(c, d, n))
