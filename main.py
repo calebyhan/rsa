@@ -30,10 +30,6 @@ def decrypt(c, d, n):
 
 d, e, n = find_keys(p, q)
 
-print(d, e, n)
-
 c = encrypt(85, e, n)
-
-print("done")
 
 print(decrypt(c, d, n))
